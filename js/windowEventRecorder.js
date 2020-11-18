@@ -37,10 +37,10 @@ const recordEvent = (e) => {
    */
   try {
     let selector = finder(e.target, {
-      'idName': (name) => true,
-      'className': (name) => true, // !name.startsWith('is-') etc.
+      'idName': (name) => false,
+      'className': (name) => false, // !name.startsWith('is-') etc.
       'tagName': (name) => true,
-      'attr': (name, value) => !attrFilter.includes(name),
+      'attr': (name, value) => ['class', 'id'].includes(name) ? !!(name && value) : true,
       'seedMinLength': 1, // Min 1
       'optimizedMinLength': 2 // Min 2
     });

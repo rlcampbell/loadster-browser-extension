@@ -178,7 +178,10 @@ const finder = (function () {
   }
 
   function attr(input) {
-    const attrs = Array.from(input.attributes).filter((attr) => config.attr(attr.name, attr.value));
+    const order = { id: 1 };
+    const attrs = Array.from(input.attributes)
+      .filter((attr) => config.attr(attr.name, attr.value))
+      .sort((a, b) => ((order[a.name] || 2) - (order[b.name] || 2)));
     return attrs.map((attr) => ({
       'name': `[${cssesc(attr.name, {
         isIdentifier: true
